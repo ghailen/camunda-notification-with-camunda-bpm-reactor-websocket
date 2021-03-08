@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0mhrups" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
+  <bpmn:process id="validation" name="Validation" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_00tdocn</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_00tdocn" sourceRef="StartEvent_1" targetRef="Task_15olz0j" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0g1kxqi" name="is weather ok ?">
+      <bpmn:incoming>SequenceFlow_1l1ep0o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1bkgu7s</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1m7lhet</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1l1ep0o" sourceRef="Task_15olz0j" targetRef="ExclusiveGateway_0g1kxqi" />
+    <bpmn:sequenceFlow id="SequenceFlow_1bkgu7s" sourceRef="ExclusiveGateway_0g1kxqi" targetRef="Task_1890f0l">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validate}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1m7lhet" sourceRef="ExclusiveGateway_0g1kxqi" targetRef="Task_0d3upo9">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validate}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_0pxx3a2">
+      <bpmn:incoming>SequenceFlow_1oez311</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1oez311" sourceRef="Task_1890f0l" targetRef="EndEvent_0pxx3a2" />
+    <bpmn:endEvent id="EndEvent_15htuog">
+      <bpmn:incoming>SequenceFlow_1s4f4cy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1s4f4cy" sourceRef="Task_0d3upo9" targetRef="EndEvent_15htuog" />
+    <bpmn:userTask id="Task_1890f0l" name="Weather OK">
+      <bpmn:incoming>SequenceFlow_1bkgu7s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1oez311</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_0d3upo9" name="Weather Not Ok">
+      <bpmn:incoming>SequenceFlow_1m7lhet</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1s4f4cy</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_15olz0j" name="CheckWeather">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="validate" label="Validation" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_00tdocn</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1l1ep0o</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="validation">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="161" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_00tdocn_di" bpmnElement="SequenceFlow_00tdocn">
+        <di:waypoint x="228" y="179" />
+        <di:waypoint x="263" y="179" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0g1kxqi_di" bpmnElement="ExclusiveGateway_0g1kxqi" isMarkerVisible="true">
+        <dc:Bounds x="406" y="154" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="452" y="197" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1l1ep0o_di" bpmnElement="SequenceFlow_1l1ep0o">
+        <di:waypoint x="363" y="179" />
+        <di:waypoint x="406" y="179" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1bkgu7s_di" bpmnElement="SequenceFlow_1bkgu7s">
+        <di:waypoint x="431" y="154" />
+        <di:waypoint x="431" y="115" />
+        <di:waypoint x="553" y="115" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1m7lhet_di" bpmnElement="SequenceFlow_1m7lhet">
+        <di:waypoint x="431" y="204" />
+        <di:waypoint x="431" y="292" />
+        <di:waypoint x="553" y="292" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0pxx3a2_di" bpmnElement="EndEvent_0pxx3a2">
+        <dc:Bounds x="738" y="97" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1oez311_di" bpmnElement="SequenceFlow_1oez311">
+        <di:waypoint x="653" y="115" />
+        <di:waypoint x="738" y="115" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_15htuog_di" bpmnElement="EndEvent_15htuog">
+        <dc:Bounds x="738" y="274" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1s4f4cy_di" bpmnElement="SequenceFlow_1s4f4cy">
+        <di:waypoint x="653" y="292" />
+        <di:waypoint x="738" y="292" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_13n0dty_di" bpmnElement="Task_1890f0l">
+        <dc:Bounds x="553" y="75" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0ns8oh4_di" bpmnElement="Task_0d3upo9">
+        <dc:Bounds x="553" y="252" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0k7u60k_di" bpmnElement="Task_15olz0j">
+        <dc:Bounds x="263" y="139" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

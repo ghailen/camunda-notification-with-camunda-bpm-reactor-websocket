@@ -1,0 +1,12 @@
+https://pusher.com/tutorials/chatroom-angular-chatkit:
+
+
+Cluster:us1
+instance : angular-chatroom
+
+user identifier: ghailene   (id)
+displayname: ghailene
+
+
+CHATKIT_INSTANCE_LOCATOR=v1:us1:71bc51ca-1cea-4446-82c8-600070be3156
+CHATKIT_SECRET_KEY=1b3a62c2-6987-4314-9e9b-aea61d2c01b2:dZoiP3TIuagVCjpRy4FVj3Kg2s73w6oopZAlEA3USWU=
